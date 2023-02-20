@@ -1,0 +1,381 @@
+#: import Factory kivy.factory.Factory
+
+WindowMan:
+    LoginPage:
+        id:LoginPage
+    MainScreen:
+        id : MainScreen
+    SignUp:
+        id: SignUp    
+    Allow:
+        id:Allow
+    Queries:
+        id : Queries
+    Setting:
+        id:Setting
+    PersonalData:
+        id:PersonalData
+    Notification:
+        id:Notification
+    TasksOptions:
+        id:TasksOptions 
+         
+<Allow>:
+    name: "Allow"
+    BoxLayout:
+        size_hint: None, None
+        size: 300, 450
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding:65
+        spacing: 15
+        orientation: 'vertical'
+        MDLabel:
+            pos_hint: {"x":0.2, "top":1}
+            size_hint: 0.6, 0.6
+            text:"Do you allow app to access sensors and memory?"
+        Button:
+            id : Yes
+            text: "Allow" 
+            size_hint: 0.25, 0.25
+            pos_hint: {"x":0.45}
+            background_color: 0,0,1,0.5
+            on_release: app.root.current = "SignUp" 
+        Button:
+            id : No
+            text: "No"  
+            size_hint: 0.25, 0.25 
+            background_color: 0,0,1,0.5
+            pos_hint: {"x":0.45}
+            on_press: app.root.current="LoginPage"     
+
+<LoginPage>:
+    name: "LoginPage"
+    MDCard:
+        size_hint: None, None
+        size: 300, 450
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 65
+        spacing: 30
+        orientation: 'vertical'
+        MDIcon:
+            icon: 'account'
+            icon_color: 0, 0, 0, 0
+            halign: 'center'
+            font_size: 100
+        MDTextFieldRound:
+            id: user
+            icon_left: "account-check"
+            hint_text: "Username"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            width: 220
+            font_size: 20
+            pos_hint: {"center_x": 0.5}
+        MDTextFieldRound:
+            id: password
+            icon_left: "key-variant"
+            hint_text: "Password"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            width: 220
+            font_size: 20            
+            pos_hint: {"center_x": 0.5}
+            password: True
+        MDFillRoundFlatButton:
+            text: "Sign In"
+            font_size: 15
+            pos_hint: {"center_x": 0.5} 
+            on_press : app.checking()
+        MDFillRoundFlatButton:
+            text: "Sign Up"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press:app.root.current = "Allow"
+
+<SignUp>:
+    name: "SignUp"
+    MDCard:
+        size_hint: None, None
+        size: 300, 450
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 65
+        spacing: 30
+        orientation: 'vertical'
+        MDTextFieldRound:
+            id: user
+            icon_left: "account-check"
+            hint_text: "Username"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            width: 220
+            font_size: 20
+            pos_hint: {"center_x": 0.5}
+        MDTextFieldRound:
+            id: password
+            icon_left: "key-variant"
+            hint_text: "Password"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            width: 220
+            font_size: 20            
+            pos_hint: {"center_x": 0.5}
+        MDFillRoundFlatButton:
+            text: "Register"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press : root.registeration()
+            on_release: app.root.current = "PersonalData"             
+                    
+<PersonalData>:
+    name : "PersonalData" 
+    BoxLayout:
+        size_hint: None, None
+        size: 300, 450
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 5
+        padding: 60
+        spacing: 20
+        orientation: 'vertical'
+        MDTextFieldRound:
+            id: name
+            hint_text: "What is your name?"
+            size_hint_x: None
+            font_size: 18     
+            width : 220       
+            pos_hint: {"center_x": 0.5}
+        MDTextFieldRound:
+            id: age
+            hint_text: "How old are you?"
+            size_hint_x: None
+            font_size: 18
+            width : 220
+            pos_hint: {"center_x": 0.5}
+        MDTextFieldRound:
+            id: weight
+            hint_text: "Enter your weight"
+            size_hint_x: None
+            font_size: 18  
+            width : 220          
+            pos_hint: {"center_x": 0.5}
+        MDTextFieldRound:
+            id:tall
+            hint_text: "Enter your height"
+            size_hint_x: None
+            pos_hint: {"center_x": 0.5}
+            font_size: 18  
+            width : 220
+        MDTextFieldRound:
+            id:JobPos
+            hint_text: "job position:Active/Sedentary"
+            size_hint_x: None
+            pos_hint: {"center_x": 0.5}
+            font_size: 14
+            width : 220 
+        MDFillRoundFlatButton:
+            text: "Finish"
+            font_size: 15
+            pos_hint: {"center_x": 0.8 }
+            on_press:root.submitdata()
+            on_release:app.root.current = "MainScreen"
+
+<MainScreen>:
+    name:"MainScreen"
+    ScrollView:
+        do_scroll_x: False
+        GridLayout:
+            id: container
+            cols: 1
+            size_hint: None, None
+            size: root.width, 1200
+            pos_hint: {'center_x': .5, 'center_y': .5}  
+            BoxLayout:
+                size_hint: None, None
+                size: 300, 450
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                elevation: 10
+                padding: 30
+                spacing: 10
+                orientation: 'vertical'  
+                MDGridLayout:
+                    cols: 2
+                    orientation: "tb-lr"
+                    size_hint_y: None
+                    height:self.minimum_height
+                    MDLabel: 
+                        text: "Remind me"
+                        foreground_color: 1, 0, 1, 1
+                        size_hint_x: None
+                        font_size: 18              
+                        width : 220       
+                        #pos_hint: {"center_x": 0.5,"center_y": 0.2}
+                    MDSwitch:
+                        # False means OFF and True means ON
+                        active: False
+                        # Arranging a callback to the switch
+                        #pos_hint: {"center_x": 0.5,"center_y": 0.2}
+                        on_active: root.switch_remind(self, self.active)
+                MDGridLayout:
+                    cols: 2
+                    orientation: "tb-lr"
+                    size_hint_y: None
+                    height:self.minimum_height
+                    MDLabel: 
+                        text: "Pause"
+                        foreground_color: 1, 0, 1, 1
+                        size_hint_x: None
+                        font_size: 18              
+                        width : 220       
+                        pos_hint: {"center_x": 0.5,"center_y": 0.8}
+                    MDSwitch:
+                        # False means OFF and True means ON
+                        active: False
+                        # Arranging a callback to the switch
+                        pos_hint: {"center_x": 0.5,"center_y": 0.8}
+                        on_active: root.switch_pause(self, self.active)
+                MDFillRoundFlatButton:
+                    text: "Check Out"
+                    pos_hint: {"center_x": 0.5}
+                    on_press: root.Check_Out()
+                MDFillRoundFlatButton:
+                    text: "Check In"
+                    pos_hint: {"center_x": 0.5}
+                    on_press: root.Check_In()
+
+                MDFillRoundFlatButton:
+                    text: "Setting"
+                    pos_hint: {"center_x": 0.5}
+                    on_press: app.root.current = "Setting" 
+                MDFillRoundFlatButton:
+                    text: "Queries" 
+                    pos_hint: {"center_x": 0.5}
+                    on_press: app.root.current = "Queries"
+                MDFillRoundFlatButton:
+                    text: "Motivation Task Manager" 
+                    pos_hint: {"center_x": 0.5}   
+                    on_release: 
+                        app.root.current = "TasksOptions"
+
+<Queries>:
+    name:"Queries"
+    BoxLayout:
+        size_hint: None, None
+        size: 300, 450
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 5
+        padding: 60
+        spacing: 20
+        orientation: 'vertical'
+        Image:
+            id:Image
+            source:'pic.png'
+            allow_stretch:True
+            keep_ratio: True
+            pos_hint:{'top':1}
+     
+
+<TasksOptions>:
+    name: "TasksOptions"
+    BoxLayout:
+        orientation: 'vertical'
+        size: 300, 450
+        padding :35
+        MDLabel: 
+            text: "Choose one task"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            font_size: 18              
+            width : 220    
+        MDGridLayout:
+            cols: 2
+            row_force_default :True
+            row_default_height : 40
+            orientation: "tb-lr"
+            size_hint_y: None
+            height:self.minimum_height
+            MDLabel:     
+                text: (root.w)
+            MDIconButton:
+                icon:"walk"     
+                user_font_size: "30sp"
+                # bgcolor of iconbutton
+                md_bg_color:[0,1,0,0.6]
+                on_press: root.selectwalk()
+        MDGridLayout:
+            cols: 2
+            row_force_default :True
+            row_default_height : 40
+            orientation: "tb-lr"
+            size_hint_y: None
+            height:self.minimum_height        
+            MDLabel:
+                text:(root.r)
+            MDIconButton:
+                icon:"run"    
+                user_font_size: "30sp"
+                # bgcolor of iconbutton
+                md_bg_color:[0,1,0,0.6]  
+                on_press: root.selectrun()
+        MDFillRoundFlatButton:
+            text: "Finish"
+            font_size: 15
+            pos_hint: {"center_x": 0.8 }
+            on_release:app.root.current = "MainScreen"  
+
+<Notification>:
+    name :"Notification"
+    BoxLayout:
+        orientation: 'vertical'
+        size: 300, 450
+        padding :35
+        MDLabel: 
+            text: "After how many minutes do need alarm?"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            font_size: 18              
+            width : 220    
+        MDTextFieldRound:
+            id:timer
+            hint_text: "-- mins"
+            size_hint_x: None
+            pos_hint: {"center_x": 0.5}
+            font_size: 18  
+            width : 220
+        MDLabel: 
+            text: root.showtask()
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            font_size: 18              
+            width : 220  
+       
+        MDFillRoundFlatButton:  
+            text: "submit timer"
+            background_color:  0, 1, 0, 0.5
+            width: dp(250)
+            pos_hint: {"center_x": 0.8,"center_y": 0.1}
+            on_press: app.submittimer()
+            on_release:app.root.current = "MainScreen"
+ 
+<Setting>:
+    name : "Setting"
+    BoxLayout:
+        orientation:"vertical"
+        sapcing: 10
+        padding: 80
+        Button:
+            text: "Notifications"
+            background_color:  0, 1, 0, 0.5 
+            on_release: app.root.current = "Notification"
+        Button:
+            text: "Personal Data"
+            background_color:  0, 1, 0, 0.5
+            on_release: app.root.current = "PersonalData"
+
+        MDFillRoundFlatButton:  
+            text: "Back"       
+            pos_hint :{"center_x":0.5}
+            on_press: app.root.current = "MainScreen"
+
+
